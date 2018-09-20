@@ -16,10 +16,6 @@ spark = sql.SparkSession. \
             config('spark.executor.memory', '5G'). \
             getOrCreate()
 
-schema_datatype = StructType([StructField('DateTime1',TimestampType(),True),
-StructField('DateTime2',TimestampType(),True),
-StructField('Date',DataType(),True)])
-
 schema_datatype = StructType([StructField("date", StringType(), True), # TimestampType
                               StructField("maximum temperature", FloatType(), True),
                               StructField("minimum temperature", FloatType(), True),
