@@ -35,9 +35,19 @@ df = df.withColumn('Null', F.lit(None))
 
 # select a subset of data
 df = df.select(['date', 'maximum temperature', 'minimum temperature', 'average temperature', 'colsum1'])
+
 # fill na
 df = df.na.fill(value=0, subset=['colsum1'])
 df.show()
+
+# Dropna
+df.na.drop(how='any')
+
+# drop list col
+df.drop(*['colsum1', 'colsum2'])
+
+# Median
+medians = df.approxQuantile(col='constant', probabilities=[0.5], relativeError=0.00001)[0]
 
 # Write to csv brings all teh
 df.repartition(1).write.option("header", "true").mode("overwrite").csv("./data/output/output.csv")
